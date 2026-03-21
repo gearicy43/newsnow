@@ -39,52 +39,55 @@ const quick = defineSource(async () => {
 const renqi = defineSource(async () => {
   const baseURL = "https://36kr.com"
   const formatted = dayjs().format("YYYY-MM-DD")
-  const url = `${baseURL}/hot-list/renqi/${formatted}/1`
 
-  const response = await myFetch<any>(url, {
+  // 调用官方 API 获取人气榜数据
+  const response = await myFetch<any>("https://gateway.36kr.com/api/mis/nav/home/nav/rank/hot", {
+    method: "POST",
     headers: {
-      "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
-      "Referer": "https://www.freebuf.com/",
-      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+      "Content-Type": "application/json",
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
     },
+    body: JSON.stringify({
+      partner_id: "wap",
+      param: {
+        siteId: 1,
+        platformId: 2,
+        hotType: "renqi",
+        hotDate: formatted,
+        pageSize: 30,
+        pageNum: 1,
+      },
+    }),
   })
 
-  const $ = load(response)
   const articles: NewsItem[] = []
 
-  // 单条新闻选择器
-  const $items = $(".article-item-info")
+  // API 返回的数据结构：response.data.hotRankList
+  if (response && response.data && Array.isArray(response.data.hotRankList)) {
+    response.data.hotRankList.forEach((item: any) => {
+      const material = item.templateMaterial
+      if (material) {
+        const title = material.widgetTitle || ""
+        const route = item.route || ""
+        const author = material.authorName || ""
+        const viewCount = material.statRead || 0
+        const praiseCount = material.statPraise || 0
 
-  $items.each((_, el) => {
-    const $el = $(el)
+        if (title && route) {
+          articles.push({
+            url: `https://www.36kr.com/p/${item.itemId}`,
+            title,
+            id: String(item.itemId),
+            extra: {
+              info: `${author}  |  ${viewCount}阅读`,
+              hover: `${praiseCount}点赞`,
+            },
+          })
+        }
+      }
+    })
+  }
 
-    // 标题和链接
-    const $a = $el.find("a.article-item-title.weight-bold")
-    const href = $a.attr("href") || ""
-    const title = $a.text().trim()
-
-    const description = $el.find("a.article-item-description.ellipsis-2").text().trim()
-
-    // 作者
-    const author = $el.find(".kr-flow-bar-author").text().trim()
-
-    // 热度
-    const hot = $el.find(".kr-flow-bar-hot span").text().trim()
-
-    if (href && title) {
-      articles.push({
-        url: href.startsWith("http") ? href : `${baseURL}${href}`,
-        title,
-        id: href.slice(3), // 简化处理
-        // url.slice(url.lastIndexOf("/") + 1)
-        extra: {
-          info: `${author}  |  ${hot}`,
-          hover: description,
-        },
-      })
-    }
-  })
   return articles
 })
 
