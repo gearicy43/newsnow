@@ -259,6 +259,7 @@ export const originSources = {
     home: "https://news.ycombinator.com/",
   },
   "producthunt": {
+    disable: true,
     name: "Product Hunt",
     color: "red",
     column: "tech",
@@ -368,6 +369,7 @@ export const originSources = {
     disable: true,
   },
   "nowcoder": {
+    disable: true,
     name: "牛客",
     column: "china",
     color: "blue",
@@ -416,6 +418,7 @@ export const originSources = {
     },
   },
   "douban": {
+    disable: true,
     name: "豆瓣",
     column: "china",
     title: "热门电影",
@@ -424,6 +427,7 @@ export const originSources = {
     home: "https://www.douban.com",
   },
   "steam": {
+    disable: true,
     name: "Steam",
     column: "world",
     title: "在线人数",
@@ -446,6 +450,7 @@ export const originSources = {
     },
   },
   "freebuf": {
+    disable: true,
     name: "Freebuf",
     column: "china",
     title: "网络安全",
@@ -455,6 +460,7 @@ export const originSources = {
   },
 
   "qqvideo": {
+    disable: true,
     name: "腾讯视频",
     column: "china",
     color: "blue",
@@ -470,6 +476,7 @@ export const originSources = {
     },
   },
   "iqiyi": {
+    disable: true,
     name: "爱奇艺",
     column: "china",
     color: "green",
