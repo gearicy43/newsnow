@@ -7,16 +7,17 @@ export function NavBar() {
   const { toggle } = useSearchBar()
   return (
     <span className={$([
-      "flex p-3 rounded-2xl bg-primary/1 text-sm",
-      "shadow shadow-primary/20 hover:shadow-primary/50 transition-shadow-500",
+      "flex p-1.5 pr-2 rounded-full bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl",
+      "shadow-lg shadow-slate-300/50 dark:shadow-slate-900/50 border border-white/20 dark:border-slate-700/30",
+      "text-sm gap-0.5",
     ])}
     >
       <button
         type="button"
         onClick={() => toggle(true)}
         className={$(
-          "px-2 hover:(bg-primary/10 rounded-md) op-70 dark:op-90",
-          "cursor-pointer transition-all",
+          "px-3 py-1.5 hover:(bg-primary/15 rounded-full) op-60 dark:op-75",
+          "cursor-pointer transition-all duration-300",
         )}
       >
         更多
@@ -27,8 +28,10 @@ export function NavBar() {
           to="/c/$column"
           params={{ column: columnId }}
           className={$(
-            "px-2 hover:(bg-primary/10 rounded-md) cursor-pointer transition-all",
-            currentId === columnId ? "color-primary font-bold" : "op-70 dark:op-90",
+            "px-3 py-1.5 hover:(bg-primary/15 rounded-full) cursor-pointer transition-all duration-300",
+            currentId === columnId 
+              ? "color-primary font-semibold bg-primary/10 rounded-full shadow-sm" 
+              : "op-60 dark:op-75 hover:op-80",
           )}
         >
           {metadata[columnId].name}

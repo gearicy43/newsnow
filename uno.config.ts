@@ -17,23 +17,23 @@ export default defineConfig({
       const hex: any = theme.colors?.[d]?.[400]
       if (hex) {
         return {
-          "background-image": `radial-gradient(ellipse 80% 80% at 50% -30%,
-         rgba(${hex2rgba(hex)?.join(", ")}, 0.3), rgba(255, 255, 255, 0));`,
+          "background-image": `radial-gradient(ellipse 80% at 50% -20%,
+         rgba(${hex2rgba(hex)?.join(", ")}, 0.25), rgba(255, 255, 255, 0));`,
         }
       }
     }],
     [
       "font-brand",
       {
-        "font-family": `"Baloo 2", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace; `,
+        "font-family": `"Baloo 2", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif; `,
       },
     ],
   ],
   shortcuts: {
-    "color-base": "color-neutral-800 dark:color-neutral-300",
-    "bg-base": "bg-zinc-200 dark:bg-dark-600",
-    "btn": "op50 hover:op85 cursor-pointer transition-all",
+    "color-base": "color-slate-700 dark:color-slate-200",
+    "bg-base": "bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-900 dark:to-slate-800",
+    "btn": "op60 hover:op90 cursor-pointer transition-all duration-300 hover:scale-110",
   },
   safelist: [
     ...["orange", ...new Set(Object.values(sources).map(k => k.color))].map(k =>
@@ -43,7 +43,7 @@ export default defineConfig({
   ],
   extendTheme: (theme) => {
     // @ts-expect-error >_<
-    theme.colors.primary = theme.colors.red
+    theme.colors.primary = theme.colors.sky
     return theme
   },
 })

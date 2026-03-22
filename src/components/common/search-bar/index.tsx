@@ -117,20 +117,20 @@ function SourceItem({ item }: {
     <Command.Item
       keywords={[item.name, item.title ?? "", item.pinyin]}
       value={item.id}
-      className="flex justify-between items-center p-2"
+      className="flex justify-between items-center p-2.5 rounded-xl transition-all duration-200"
       onSelect={toggleFocus}
     >
-      <span className="flex gap-2 items-center">
+      <span className="flex gap-2.5 items-center">
         <span
-          className={$("w-4 h-4 rounded-md bg-cover")}
+          className={$("w-5 h-5 rounded-lg bg-cover shadow-sm")}
           style={{
             backgroundImage: `url(/icons/${item.id.split("-")[0]}.png)`,
           }}
         />
-        <span>{item.name}</span>
-        <span className="text-xs text-neutral-400/80 self-end mb-3px">{item.title}</span>
+        <span className="font-medium">{item.name}</span>
+        {item.title && <span className="text-xs text-slate-400 dark:text-slate-500 self-end mb-3px font-medium">{item.title}</span>}
       </span>
-      <span className={$(isFocused ? "i-ph-star-fill" : "i-ph-star-duotone", "bg-primary op-40")}></span>
+      <span className={$(isFocused ? "i-ph-star-fill text-yellow-500 scale-110" : "i-ph-star-duotone op-40", "transition-all duration-300")}></span>
     </Command.Item>
   )
 }

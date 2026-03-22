@@ -33,11 +33,13 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
     <div
       ref={ref}
       className={$(
-        "flex flex-col h-500px rounded-2xl p-4 cursor-default",
-        // "backdrop-blur-5",
-        "transition-opacity-300",
-        isDragging && "op-50",
-        `bg-${sources[id].color}-500 dark:bg-${sources[id].color} bg-op-40!`,
+        "flex flex-col h-500px rounded-3xl p-5 cursor-default",
+        "backdrop-blur-xl backdrop-saturate-150",
+        "transition-all duration-500",
+        isDragging && "op-40 scale-95",
+        `bg-${sources[id].color}-500 dark:bg-${sources[id].color} bg-op-35!`,
+        "shadow-2xl shadow-slate-400/30 dark:shadow-slate-900/50",
+        "border border-white/30 dark:border-slate-700/30",
       )}
       style={{
         transformOrigin: "50% 50%",
@@ -106,10 +108,10 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
 
   return (
     <>
-      <div className={$("flex justify-between mx-2 mt-0 mb-2 items-center")}>
-        <div className="flex gap-2 items-center">
+      <div className={$("flex justify-between mx-3 mt-1 mb-3 items-center")}>
+        <div className="flex gap-2.5 items-center">
           <a
-            className={$("w-8 h-8 rounded-full bg-cover")}
+            className={$("w-9 h-9 rounded-xl bg-cover shadow-md shadow-slate-400/20 hover:shadow-lg transition-all duration-300 hover:scale-105")}
             target="_blank"
             href={sources[id].home}
             title={sources[id].desc}
@@ -120,32 +122,32 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
           <span className="flex flex-col">
             <span className="flex items-center gap-2">
               <span
-                className="text-xl font-bold"
+                className="text-lg font-bold tracking-tight"
                 title={sources[id].desc}
               >
                 {sources[id].name}
               </span>
-              {sources[id]?.title && <span className={$("text-sm", `color-${sources[id].color} bg-base op-80 bg-op-50! px-1 rounded`)}>{sources[id].title}</span>}
+              {sources[id]?.title && <span className={$("text-xs font-medium", `color-${sources[id].color} bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm op-85 px-1.5 py-0.5 rounded-full border border-white/20 dark:border-slate-700/30`)}>{sources[id].title}</span>}
             </span>
-            <span className="text-xs op-70"><UpdatedTime isError={isError} updatedTime={data?.updatedTime} /></span>
+            <span className="text-xs op-60"><UpdatedTime isError={isError} updatedTime={data?.updatedTime} /></span>
           </span>
         </div>
         <div className={$("flex gap-2 text-lg", `color-${sources[id].color}`)}>
           <button
             type="button"
-            className={$("btn i-ph:arrow-counter-clockwise-duotone", isFetching && "animate-spin i-ph:circle-dashed-duotone")}
+            className={$("btn i-ph:arrow-counter-clockwise-duotone hover:rotate-180 transition-transform duration-500", isFetching && "animate-spin i-ph:circle-dashed-duotone")}
             onClick={() => refresh(id)}
           />
           <button
             type="button"
-            className={$("btn", isFocused ? "i-ph:star-fill" : "i-ph:star-duotone")}
+            className={$("btn transition-all duration-300", isFocused ? "i-ph:star-fill text-yellow-500 scale-110" : "i-ph:star-duotone hover:text-yellow-500")}
             onClick={toggleFocus}
           />
           {/* firefox cannot drag a button */}
           {setHandleRef && (
             <div
               ref={setHandleRef}
-              className={$("btn", "i-ph:dots-six-vertical-duotone", "cursor-grab")}
+              className={$("btn", "i-ph:dots-six-vertical-duotone", "cursor-grab active:cursor-grabbing hover:scale-110 transition-transform")}
             />
           )}
         </div>
@@ -153,7 +155,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
 
       <OverlayScrollbar
         className={$([
-          "h-full p-2 overflow-y-auto rounded-2xl bg-base bg-op-70!",
+          "h-full p-2.5 overflow-y-auto rounded-2xl bg-white/40 dark:bg-slate-800/40 bg-op-60! backdrop-blur-sm",
           isFetching && `animate-pulse`,
           `sprinkle-${sources[id].color}`,
         ])}
@@ -229,7 +231,7 @@ function NewsUpdatedTime({ date }: { date: string | number }) {
 function NewsListHot({ items }: { items: NewsItem[] }) {
   const { width } = useWindowSize()
   return (
-    <ol className="flex flex-col gap-2">
+    <ol className="flex flex-col gap-2.5">
       {items?.map((item, i) => (
         <a
           href={width < 768 ? item.mobileUrl || item.url : item.url}
@@ -237,19 +239,25 @@ function NewsListHot({ items }: { items: NewsItem[] }) {
           key={item.id}
           title={item.extra?.hover}
           className={$(
-            "flex gap-2 items-center items-stretch relative cursor-pointer [&_*]:cursor-pointer transition-all",
-            "hover:bg-neutral-400/10 rounded-md pr-1 visited:(text-neutral-400)",
+            "group flex gap-2.5 items-center relative cursor-pointer [&_*]:cursor-pointer transition-all duration-300",
+            "hover:bg-white/50 dark:hover:bg-slate-700/40 rounded-xl px-2 py-1.5 -mx-2",
+            "visited:(text-slate-400 dark:text-slate-500)",
           )}
         >
-          <span className={$("bg-neutral-400/10 min-w-6 flex justify-center items-center rounded-md text-sm")}>
+          <span className={$(
+            "min-w-6 h-6 flex justify-center items-center rounded-lg text-sm font-semibold",
+            i < 3 
+              ? "bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-md shadow-primary/30" 
+              : "bg-slate-200/70 dark:bg-slate-700/50 text-slate-600 dark:text-slate-300",
+          )}>
             {i + 1}
           </span>
           {!!item.extra?.diff && <DiffNumber diff={item.extra.diff} />}
-          <span className="self-start line-height-none">
-            <span className="mr-2 text-base">
+          <span className="flex-1 self-start line-height-none">
+            <span className="mr-2 text-[15px] font-medium text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
               {item.title}
             </span>
-            <span className="text-xs text-neutral-400/80 truncate align-middle">
+            <span className="text-xs text-slate-400 dark:text-slate-500 truncate align-middle inline-flex items-center gap-1">
               <ExtraInfo item={item} />
             </span>
           </span>
@@ -262,22 +270,24 @@ function NewsListHot({ items }: { items: NewsItem[] }) {
 function NewsListTimeLine({ items }: { items: NewsItem[] }) {
   const { width } = useWindowSize()
   return (
-    <ol className="border-s border-neutral-400/50 flex flex-col ml-1">
+    <ol className="border-s border-slate-300/40 dark:border-slate-600/40 flex flex-col ml-1 gap-3">
       {items?.map(item => (
-        <li key={`${item.id}-${item.pubDate || item?.extra?.date || ""}`} className="flex flex-col">
-          <span className="flex items-center gap-1 text-neutral-400/50 ml--1px">
-            <span className="">-</span>
-            <span className="text-xs text-neutral-400/80">
+        <li key={`${item.id}-${item.pubDate || item?.extra?.date || ""}`} className="flex flex-col group">
+          <span className="flex items-center gap-2 text-slate-400 dark:text-slate-500 ml-0.5 text-xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600"></span>
+            <span className="font-mono">
               {(item.pubDate || item?.extra?.date) && <NewsUpdatedTime date={(item.pubDate || item?.extra?.date)!} />}
             </span>
-            <span className="text-xs text-neutral-400/80">
+            <span className="text-slate-400 dark:text-slate-500">
               <ExtraInfo item={item} />
             </span>
           </span>
           <a
             className={$(
-              "ml-2 px-1 hover:bg-neutral-400/10 rounded-md visited:(text-neutral-400/80)",
-              "cursor-pointer [&_*]:cursor-pointer transition-all",
+              "ml-3 px-2 py-1.5 hover:bg-white/50 dark:hover:bg-slate-700/40 rounded-xl -mx-2 transition-all duration-300",
+              "visited:(text-slate-400 dark:text-slate-500)",
+              "text-slate-700 dark:text-slate-200 font-medium",
+              "hover:text-slate-900 dark:hover:text-white hover:shadow-sm",
             )}
             href={width < 768 ? item.mobileUrl || item.url : item.url}
             title={item.extra?.hover}

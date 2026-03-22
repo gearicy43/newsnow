@@ -49,17 +49,17 @@ export function Header() {
   return (
     <>
       <span className="flex justify-self-start">
-        <Link to="/" className="flex gap-2 items-center">
-          <div className="h-10 w-10 bg-cover" title="logo" style={{ backgroundImage: "url(/icon.svg)" }} />
-          <span className="text-2xl font-brand line-height-none!">
-            <p>News</p>
-            <p className="mt--1">
-              <span className="color-primary-6">N</span>
+        <Link to="/" className="flex gap-2.5 items-center group">
+          <div className="h-11 w-11 bg-cover rounded-xl shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-all duration-300 group-hover:scale-105" title="logo" style={{ backgroundImage: "url(/icon.svg)" }} />
+          <span className="text-2.5xl font-brand line-height-none! tracking-tight">
+            <p className="font-semibold bg-gradient-to-r from-slate-700 to-slate-900 dark:from-slate-200 dark:to-white bg-clip-text text-transparent">News</p>
+            <p className="mt--1 font-semibold bg-gradient-to-r from-primary-600 to-primary-400 dark:from-primary-400 dark:to-primary-300 bg-clip-text text-transparent">
+              <span>N</span>
               <span>ow</span>
             </p>
           </span>
         </Link>
-        <a target="_blank" href={`${Homepage}/releases/tag/v${Version}`} className="btn text-sm ml-1 font-mono">
+        <a target="_blank" href={`${Homepage}/releases/tag/v${Version}`} className="btn text-sm ml-1 font-mono px-2.5 py-1 rounded-full bg-slate-200/50 dark:bg-slate-700/50 hover:bg-slate-300/50 dark:hover:bg-slate-600/50 backdrop-blur-sm">
           {`v${Version}`}
         </a>
       </span>
@@ -68,7 +68,7 @@ export function Header() {
           <NavBar />
         </span>
       </span>
-      <span className="justify-self-end flex gap-2 items-center text-xl text-primary-600 dark:text-primary">
+      <span className="justify-self-end flex gap-3 items-center text-xl text-primary-600 dark:text-primary">
         <GoTop />
         <Refresh />
         <Github />

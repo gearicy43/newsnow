@@ -23,7 +23,7 @@ export function Menu() {
             ? (
                 <button
                   type="button"
-                  className="h-6 w-6 rounded-full bg-cover"
+                  className="h-7 w-7 rounded-full bg-cover ring-2 ring-white/50 dark:ring-slate-600/50 hover:ring-primary/50 transition-all duration-300"
                   style={
                     {
                       backgroundImage: `url(${userInfo.avatar}&s=24)`,
@@ -32,25 +32,38 @@ export function Menu() {
                 >
                 </button>
               )
-            : <button type="button" className="btn i-si:more-muted-horiz-circle-duotone" />
+            : <button type="button" className="btn i-si:more-muted-horiz-circle-duotone hover:scale-110 transition-transform" />
         }
       </span>
       {shown && (
-        <div className="absolute right-0 z-99 bg-transparent pt-4 top-4">
+        <div className="absolute right-0 z-99 pt-6 top-0">
           <motion.div
             id="dropdown-menu"
             className={$([
-              "w-200px",
-              "bg-primary backdrop-blur-5 bg-op-70! rounded-lg shadow-xl",
+              "w-240px",
+              "bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl shadow-2xl shadow-slate-400/20 dark:shadow-slate-900/40 border border-white/40 dark:border-slate-700/40",
             ])}
             initial={{
-              scale: 0.9,
+              opacity: 0,
+              scale: 0.95,
+              y: -10,
             }}
             animate={{
+              opacity: 1,
               scale: 1,
+              y: 0,
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0.95,
+              y: -10,
+            }}
+            transition={{
+              duration: 0.2,
+              ease: [0.16, 1, 0.3, 1],
             }}
           >
-            <ol className="bg-base bg-op-70! backdrop-blur-md p-2 rounded-lg color-base text-base">
+            <ol className="p-2.5 color-base text-base">
               {enableLogin && (loggedIn
                 ? (
                     <li onClick={logout}>
@@ -64,12 +77,11 @@ export function Menu() {
                       <span>Github 账号登录</span>
                     </li>
                   ))}
-              {/* <ThemeToggle /> */}
               <li onClick={() => window.open(Homepage)} className="cursor-pointer [&_*]:cursor-pointer transition-all">
                 <span className="i-ph:github-logo-duotone inline-block" />
                 <span>Star on Github </span>
               </li>
-              <li className="flex gap-2 items-center">
+              <li className="flex gap-2 items-center mt-1">
                 <a
                   href="https://github.com/ourongxing/newsnow"
                 >
