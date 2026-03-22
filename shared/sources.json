@@ -482,5 +482,14 @@
     "color": "blue",
     "interval": 1800000,
     "title": "综合早报"
+  },
+  "tophub": {
+    "name": "今日热榜",
+    "type": "hottest",
+    "column": "china",
+    "color": "orange",
+    "interval": 300000,
+    "home": "https://tophub.today",
+    "title": "榜中榜"
   }
 }
