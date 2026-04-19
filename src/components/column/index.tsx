@@ -1,16 +1,24 @@
 import type { FixedColumnID } from "@shared/types"
 import { useTitle } from "react-use"
+import { useAtom } from "jotai"
+import { useEffect } from "react"
 import { NavBar } from "../navbar"
 import { Dnd } from "./dnd"
+import { HiddenColumn } from "./hidden-card"
 import { currentColumnIDAtom } from "~/atoms"
+import { metadata } from "@shared/metadata"
 
-export function Column({ id }: { id: FixedColumnID }) {
+type ColumnID = FixedColumnID | "hidden"
+
+export function Column({ id }: { id: ColumnID }) {
   const [currentColumnID, setCurrentColumnID] = useAtom(currentColumnIDAtom)
   useEffect(() => {
-    setCurrentColumnID(id)
+    if (id !== "hidden") setCurrentColumnID(id)
   }, [id, setCurrentColumnID])
 
-  useTitle(`NewsNow | ${metadata[id].name}`)
+  useTitle(`NewsNow | ${id === "hidden" ? "隐藏" : metadata[id].name}`)
+
+  if (id === "hidden") return <HiddenColumn />
 
   return (
     <>
