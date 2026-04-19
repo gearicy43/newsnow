@@ -2,6 +2,7 @@
   "v2ex-share": "V2EX-zuixinfenxiang",
   "zhihu": "zhihu",
   "weibo": "weibo-shishiresou",
+  "tophub": "jinrirebang-bangzhongbang",
   "zaobao": "lianhezaobao",
   "coolapk": "kuan-jinrizuire",
   "mktnews-flash": "MKTNews-kuaixun",
@@ -28,7 +29,6 @@
   "fastbull-news": "fabucaijing-toutiao",
   "solidot": "Solidot",
   "hackernews": "Hacker News",
-  "producthunt": "Product Hunt",
   "github-trending-today": "Github-Today",
   "bilibili-hot-search": "bilibili-resou",
   "bilibili-hot-video": "bilibili-remenshipin",
@@ -37,16 +37,10 @@
   "kaopu": "kaopuxinwen",
   "jin10": "jinshishuju",
   "baidu": "baiduresou",
-  "nowcoder": "niuke",
   "sspai": "shaoshupai",
   "juejin": "xitujuejin",
   "ifeng": "fenghuangwang-redianzixun",
   "chongbuluo-latest": "chongbuluo-zuixin",
   "chongbuluo-hot": "chongbuluo-zuire",
-  "douban": "douban-remendianying",
-  "steam": "Steam-zaixianrenshu",
-  "tencent-hot": "tengxunxinwen-zonghezaobao",
-  "freebuf": "Freebuf-wangluoanquan",
-  "qqvideo-tv-hotsearch": "tengxunshipin-resoubang",
-  "iqiyi-hot-ranklist": "aiqiyi-rebobang"
+  "tencent-hot": "tengxunxinwen-zonghezaobao"
 }

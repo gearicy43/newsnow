@@ -33,6 +33,15 @@
     "color": "red",
     "interval": 120000
   },
+  "tophub": {
+    "title": "榜中榜",
+    "name": "今日热榜",
+    "type": "hottest",
+    "column": "china",
+    "home": "https://tophub.today",
+    "color": "orange",
+    "interval": 300000
+  },
   "zaobao": {
     "name": "联合早报",
     "type": "realtime",
@@ -482,14 +491,5 @@
     "color": "blue",
     "interval": 1800000,
     "title": "综合早报"
-  },
-  "tophub": {
-    "name": "今日热榜",
-    "type": "hottest",
-    "column": "china",
-    "color": "orange",
-    "interval": 300000,
-    "home": "https://tophub.today",
-    "title": "榜中榜"
   }
 }
