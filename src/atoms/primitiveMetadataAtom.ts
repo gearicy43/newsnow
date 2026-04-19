@@ -32,23 +32,30 @@ function createPrimitiveMetadataAtom(
   return derivedAtom
 }
 
-const initialMetadata = typeSafeObjectFromEntries(typeSafeObjectEntries(metadata)
-  .filter(([id]) => fixedColumnIds.includes(id as any))
-  .map(([id, val]) => [id, val.sources] as [FixedColumnID, SourceID[]]))
+const initialMetadata = {
+  ...typeSafeObjectFromEntries(typeSafeObjectEntries(metadata)
+    .filter(([id]) => fixedColumnIds.includes(id as any))
+    .map(([id, val]) => [id, val.sources] as [FixedColumnID, SourceID[]])),
+  hidden: [] as SourceID[],
+}
+
 export function preprocessMetadata(target: PrimitiveMetadata) {
+  const hidden = target.data.hidden ?? []
   return {
     data: {
       ...initialMetadata,
       ...typeSafeObjectFromEntries(
         typeSafeObjectEntries(target.data)
-          .filter(([id]) => initialMetadata[id])
+          .filter(([id]) => id === "hidden" || initialMetadata[id])
           .map(([id, s]) => {
+            if (id === "hidden") return [id, s.filter(k => sources[k])]
             if (id === "focus") return [id, s.filter(k => sources[k]).map(k => sources[k].redirect ?? k)]
             const oldS = s.filter(k => initialMetadata[id].includes(k)).map(k => sources[k].redirect ?? k)
             const newS = initialMetadata[id].filter(k => !oldS.includes(k))
             return [id, [...oldS, ...newS]]
           }),
       ),
+      hidden,
     },
     action: target.action,
     updatedTime: target.updatedTime,
