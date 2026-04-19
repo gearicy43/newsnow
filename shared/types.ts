@@ -29,7 +29,7 @@ export type Metadata = Record<ColumnID, Column>
 
 export interface PrimitiveMetadata {
   updatedTime: number
-  data: Record<FixedColumnID, SourceID[]>
+  data: Record<FixedColumnID, SourceID[]> & { hidden: SourceID[] }
   action: "init" | "manual" | "sync"
 }
 
