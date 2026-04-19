@@ -15,6 +15,20 @@ export const focusSourcesAtom = atom((get) => {
   })
 })
 
+export const hiddenSourcesAtom = atom((get) => {
+  return get(primitiveMetadataAtom).data.hidden ?? []
+}, (get, set, update: Update<SourceID[]>) => {
+  const _ = update instanceof Function ? update(get(hiddenSourcesAtom)) : update
+  set(primitiveMetadataAtom, {
+    updatedTime: Date.now(),
+    action: "manual",
+    data: {
+      ...get(primitiveMetadataAtom).data,
+      hidden: _,
+    },
+  })
+})
+
 export const currentColumnIDAtom = atom<FixedColumnID>("focus")
 
 export const currentSourcesAtom = atom((get) => {
