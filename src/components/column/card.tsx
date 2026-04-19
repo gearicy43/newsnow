@@ -154,7 +154,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
               className={$("btn i-ph:eye-slash-duotone hover:scale-110 transition-transform")}
               title="隐藏此数据源"
               onClick={() => {
-                setHiddenSources(prev => [...prev, id])
+                setHiddenSources(prev => prev.includes(id) ? prev : [...prev, id])
               }}
             />
           )}
