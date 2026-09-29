@@ -3,7 +3,7 @@
 English | [简体中文](README.zh-CN.md) | [日本語](README.ja-JP.md)
 
 > [!NOTE]
-> This is a demo version currently supporting Chinese only. A full-featured version with better customization and English content support will be released later.
+> NewsNext, the next gen of NewsNow, is coming soon, join the [waitlist](https://tally.so/r/yPBBYg).
 
 **_Elegant reading of real-time and hottest news_**
 
@@ -120,10 +120,18 @@ For detailed instructions on how to add new sources, see [CONTRIBUTING.md](CONTR
 
 ## Contributing
 
-Contributions are welcome! Feel free to submit pull requests or create issues for feature requests and bug reports.
+~~Contributions are welcome! Feel free to submit pull requests or create issues for feature requests and bug reports.~~
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on how to contribute, especially for adding new data sources.
+The new version is coming soon and we will no longer accept contributions
+
+~~See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on how to contribute, especially for adding new data sources.~~
 
 ## License
 
 [MIT](./LICENSE) © ourongxing
+
+## Sponsorship
+
+If you rely on this service, sponsorship is welcome to help it run for the long term. If you need customization or other help, you can also use the contact method below and include a note.
+
+![](./screenshots/reward.gif)
