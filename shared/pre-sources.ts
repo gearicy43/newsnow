@@ -106,9 +106,9 @@ export const originSources = {
     color: "blue",
     home: "https://36kr.com",
     column: "tech",
-    disable: "cf",
     sub: {
       quick: {
+        disable: "cf",
         title: "快讯",
       },
       renqi: {

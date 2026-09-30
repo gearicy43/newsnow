@@ -137,7 +137,6 @@
   "36kr-renqi": {
     "name": "36氪",
     "type": "hottest",
-    "disable": "cf",
     "column": "tech",
     "home": "https://36kr.com",
     "color": "blue",
