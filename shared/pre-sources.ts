@@ -108,6 +108,7 @@ export const originSources = {
     column: "tech",
     sub: {
       quick: {
+        disable: "cf",
         title: "快讯",
       },
       renqi: {

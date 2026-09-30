@@ -117,6 +117,7 @@
     "redirect": "36kr-quick",
     "name": "36氪",
     "type": "realtime",
+    "disable": "cf",
     "column": "tech",
     "home": "https://36kr.com",
     "color": "blue",
@@ -126,6 +127,7 @@
   "36kr-quick": {
     "name": "36氪",
     "type": "realtime",
+    "disable": "cf",
     "column": "tech",
     "home": "https://36kr.com",
     "color": "blue",
