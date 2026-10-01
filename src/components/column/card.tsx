@@ -6,7 +6,6 @@ import { forwardRef, useImperativeHandle } from "react"
 import { OverlayScrollbar } from "../common/overlay-scrollbar"
 import { safeParseString } from "~/utils"
 import { hiddenSourcesAtom } from "~/atoms"
-import { useLogin } from "~/hooks/useLogin"
 
 export interface ItemsProps extends React.HTMLAttributes<HTMLDivElement> {
   id: SourceID
@@ -56,7 +55,6 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
 
 function NewsCard({ id, setHandleRef }: NewsCardProps) {
   const { refresh } = useRefetch()
-  const { loggedIn } = useLogin()
   const [hiddenSources, setHiddenSources] = useAtom(hiddenSourcesAtom)
   const isHidden = hiddenSources.includes(id)
   const { data, isFetching, isError } = useQuery({
@@ -148,7 +146,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
             className={$("btn transition-all duration-300", isFocused ? "i-ph:star-fill text-yellow-500 scale-110" : "i-ph:star-duotone hover:text-yellow-500")}
             onClick={toggleFocus}
           />
-          {loggedIn && !isHidden && (
+          {!isHidden && (
             <button
               type="button"
               className={$("btn i-ph:eye-slash-duotone hover:scale-110 transition-transform")}

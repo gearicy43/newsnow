@@ -1,12 +1,10 @@
 import { fixedColumnIds, metadata } from "@shared/metadata"
 import { Link } from "@tanstack/react-router"
 import { currentColumnIDAtom, hiddenSourcesAtom } from "~/atoms"
-import { useLogin } from "~/hooks/useLogin"
 
 export function NavBar() {
   const currentId = useAtomValue(currentColumnIDAtom)
   const { toggle } = useSearchBar()
-  const loggedIn = useLogin()
   const hiddenSources = useAtomValue(hiddenSourcesAtom)
   return (
     <span className={$([
@@ -40,7 +38,7 @@ export function NavBar() {
           {metadata[columnId].name}
         </Link>
       ))}
-      {loggedIn && hiddenSources.length > 0 && (
+      {hiddenSources.length > 0 && (
         <Link
           to="/c/$column"
           params={{ column: "hidden" }}
